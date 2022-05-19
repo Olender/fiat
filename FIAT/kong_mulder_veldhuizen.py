@@ -1,6 +1,7 @@
 # Copyright (C) 2020 Robert C. Kirby (Baylor University)
 #
 # contributions by Keith Roberts (University of São Paulo)
+# modified by Alexandre Olender (University of São Paulo)
 #
 # This file is part of FIAT (https://www.fenicsproject.org)
 #
@@ -69,6 +70,15 @@ def _get_entity_ids(ref_el, degree):
                 1: dict((i, etop[i]) for i in range(3)),
                 2: {0: [i for i in range(12, 18)]},
             }
+        if sd == 3:
+            etop = [[11, 20, 8], [14, 17, 5], [6, 18, 13], [9, 21, 10], [7, 19, 12], [4, 16, 15]]
+            ftop = [[17, 18, 20, 23, 26, 31, 35, 38, 43, 47, 50, 55], [19, 20, 21, 28, 29, 30, 40, 41, 42, 52, 53, 54], [16, 17, 21, 24, 25, 33, 36, 37, 45, 48, 49, 57], [16, 18, 19, 22, 27, 32, 34, 39, 44, 46, 51, 56]]
+            entity_ids = {
+                0: dict((i, [i]) for i in range(4)),
+                1: dict((i, etop[i]) for i in range(6)),
+                2: dict((i, ftop[i]) for i in range(4)),
+                3: {0: [58,59,60,61,62,63,64]},
+            }
     elif degree == 5:
         if sd == 2:
             etop = [[9, 3, 4, 10], [12, 6, 5, 11], [13, 7, 8, 14]]
@@ -94,7 +104,7 @@ def bump(T, deg):
             else:
                 raise ValueError("Degree not supported")
         elif sd == 3:
-            if deg < 4:
+            if deg < 5:
                 return (1, 2)
             else:
                 raise ValueError("Degree not supported")
@@ -167,8 +177,8 @@ class KongMulderVeldhuizen(finite_element.CiarletElement):
             raise ValueError("KMV is only valid for triangles and tetrahedrals")
         if degree > 5 and ref_el == TRIANGLE:
             raise NotImplementedError("Only P < 6 for triangles are implemented.")
-        if degree > 3 and ref_el == TETRAHEDRON:
-            raise NotImplementedError("Only P < 4 for tetrahedrals are implemented.")
+        if degree > 4 and ref_el == TETRAHEDRON:
+            raise NotImplementedError("Only P < 5 for tetrahedrals are implemented.")
         S = KongMulderVeldhuizenSpace(ref_el, degree)
 
         dual = KongMulderVeldhuizenDualSet(ref_el, degree)

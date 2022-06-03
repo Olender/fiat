@@ -72,12 +72,12 @@ def _get_entity_ids(ref_el, degree):
             }
         if sd == 3:
             etop = [[11, 20, 8], [14, 17, 5], [6, 18, 13], [9, 21, 10], [7, 19, 12], [4, 16, 15]]
-            ftop = [[17, 18, 20, 23, 26, 31, 35, 38, 43, 47, 50, 55], [19, 20, 21, 28, 29, 30, 40, 41, 42, 52, 53, 54], [16, 17, 21, 24, 25, 33, 36, 37, 45, 48, 49, 57], [16, 18, 19, 22, 27, 32, 34, 39, 44, 46, 51, 56]]
+            ftop = [[23, 26, 31, 35, 38, 43, 47], [28, 29, 30, 40, 41, 42, 49], [24, 25, 33, 36, 37, 45, 48], [22, 27, 32, 34, 39, 44, 46]]
             entity_ids = {
                 0: dict((i, [i]) for i in range(4)),
                 1: dict((i, etop[i]) for i in range(6)),
                 2: dict((i, ftop[i]) for i in range(4)),
-                3: {0: [58,59,60,61,62,63,64]},
+                3: {0: [50,51,52,53,54,55,56,57,58,59,60,61,62,63,64]},
             }
     elif degree == 5:
         if sd == 2:
@@ -104,8 +104,10 @@ def bump(T, deg):
             else:
                 raise ValueError("Degree not supported")
         elif sd == 3:
-            if deg < 5:
+            if deg < 4:
                 return (1, 2)
+            elif deg == 4:
+                return (-1,1,1,2)
             else:
                 raise ValueError("Degree not supported")
         else:
@@ -116,7 +118,7 @@ def KongMulderVeldhuizenSpace(T, deg):
     sd = T.get_spatial_dimension()
     if deg == 1:
         return Lagrange(T, 1).poly_set
-    else:
+    elif (deg < 4 and sd == 3) or sd ==2:
         L = Lagrange(T, deg)
         # Toss the bubble from Lagrange since it's dependent
         # on the higher-dimensional bubbles
@@ -141,6 +143,25 @@ def KongMulderVeldhuizenSpace(T, deg):
             # bubble on the facet
             fbubs = FacetBubble(T, deg + bump(T, deg)[0])
             return NodalEnrichedElement(RL, bubs, fbubs).poly_set
+    elif deg ==4 and sd ==3:
+        L = Lagrange(T, deg)
+        not_inds = [L.dual.entity_ids[sd][0]] + [
+            L.dual.entity_ids[sd - 1][f] for f in L.dual.entity_ids[sd - 1]
+        ]
+        not_inds = [item for sublist in not_inds for item in sublist]
+        inds = [i for i in range(L.space_dimension()) if i not in not_inds]
+        RL = RestrictedElement(L, inds)
+        # facet bubble
+        fbubs1 = FacetBubble(T, deg + bump(T, deg)[0])
+        fbubs2 = FacetBubble(T, deg + bump(T, deg)[1])
+        # interior bubble1
+        bubs1 = Bubble(T, deg )
+        # interior bubble 2
+        bubs2 = Bubble(T, deg + bump(T, deg)[2])
+        #Interior bubble 3
+        bubs3 = Bubble(T, deg + bump(T, deg)[3])
+        return NodalEnrichedElement(RL, bubs1,bubs2,bubs3, fbubs1, fbubs2).poly_set
+
 
 
 class KongMulderVeldhuizenDualSet(dual_set.DualSet):

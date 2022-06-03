@@ -378,6 +378,7 @@ def _kmv_lump_scheme(ref_el, degree):
             w[54:60] = 0.006891012924401557
             w[60:64] = 0.007499563520517103
             w[64:65] = 0.01057967149339721
+
         else:
             raise ValueError("Dimension not supported")
 

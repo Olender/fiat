@@ -321,9 +321,90 @@ def _mlt_lump_scheme(ref_el, degree):
     elif degree == 6:
         if sd == 2:
             x = list(ref_el.vertices)
+
+            alpha = 0.5
             x.extend(
+                [
+                    (alpha, alpha),
+                    (0.0, alpha),
+                    (alpha, 0.0),
+                ] 
+            ) #edge midpoints (class 2 points)
+            alpha = 0.0829411811106452819184084
+            x.extend(
+                [
+                    (1 - alpha, alpha),
+                    (alpha, 1 - alpha),
+                    (0.0, 1 - alpha),
+                    (0.0, alpha),
+                    (alpha, 0.0),
+                    (1 - alpha, 0.0),
+                ]  # edge points (1st set of class 3 points)
+            )
+            alpha = 0.268649695592714349480742
+            x.extend(
+                [
+                    (1 - alpha, alpha),
+                    (alpha, 1 - alpha),
+                    (0.0, 1 - alpha),
+                    (0.0, alpha),
+                    (alpha, 0.0),
+                    (1 - alpha, 0.0),
+                ]  # edge points (2nd set of class 3 points)
+            )
+
+            beta = 0.468059729056814751780658
+            x.extend(
+                [
+                    (beta, beta),
+                    (1 - 2 * beta, beta),
+                    (beta, 1 - 2 * beta)
+                ] # interior points on bisector (1st set of class 5 points)
+            )
+            beta = 0.0793088545089875461560173
+            x.extend(
+                [
+                    (beta, beta),
+                    (1 - 2 * beta, beta),
+                    (beta, 1 - 2 * beta)
+                ] # interior points on bisector (2nd set of class 5 points)
+            )
+            beta = 0.392931636618867333850738
+            x.extend(
+                [
+                    (beta, beta),
+                    (1 - 2 * beta, beta),
+                    (beta, 1 - 2 * beta)
+                ] # interior points on bisector (3rd set of class 5 points)
+            )
+
+            gamma = 0.248172758709406807134069
+            delta = 0.699812197147049754157975
+            x.extend(
+                [
+                    (gamma, delta),
+                    (1 - gamma - delta, delta),
+                    (gamma, 1 - gamma - delta),
+                    (delta, gamma),
+                    (1 - gamma - delta, gamma),
+                    (delta, 1 - gamma - delta),
+                ]  # interior points (1st set of class 6 points)
+            )
+            gamma = 0.156582066033687531622229
+            delta = 0.243089592364562988710841
+            x.extend(
+                [
+                    (gamma, delta),
+                    (1 - gamma - delta, delta),
+                    (gamma, 1 - gamma - delta),
+                    (delta, gamma),
+                    (1 - gamma - delta, gamma),
+                    (delta, 1 - gamma - delta),
+                ]  # interior points (2st set of class 6 points)
+            )
+            
             w = arange(39, dtype=float64)
-            w[0:3] = 0.000535113520281665722530572 # class 1 points
+            w[0:3] = 0.000535113520281665722530572 # class 1 points (vertices)
             w[3:6] = 0.00429435346026293306665947 # class 2 points
             w[6:12] = 0.00302990950926060544290299 # class 3 points
             w[12:18] = 0.00316396316646563171286403

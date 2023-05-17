@@ -413,8 +413,7 @@ def _mlt_lump_scheme(ref_el, degree):
             w[24:27] = 0.0342178857644876540882108
             w[27:33] = 0.0173480160090330087919888 # class 6 points
             w[33:39] = 0.0198004044953264308738093
-
-            
+    
         else:
             raise ValueError("Dimension not supported")
 

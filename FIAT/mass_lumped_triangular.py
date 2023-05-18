@@ -79,8 +79,12 @@ def _get_entity_ids(ref_el, degree):
             }
     elif degree == 6:
         if sd == 3:
-            etop = []
-            entity_ids = {}
+            etop = [[6, 12, 3, 13, 7], [9, 15, 4, 14, 8], [10, 16, 5, 17, 11]]
+            entity_ids = {
+                0: dict((i, [i]) for i in range(3)),
+                1: dict((i, etop[i]) for i in range(3)),
+                2: {0: [i for i in range(15, 39)]},
+            }
     return entity_ids
 
 

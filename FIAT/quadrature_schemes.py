@@ -330,7 +330,7 @@ def _mlt_lump_scheme(ref_el, degree):
                     (alpha, 0.0),
                 ] 
             ) #edge midpoints (class 2 points)
-            alpha = 0.0829411811106452819184084
+            alpha = 0.8294118111064528e-1
             x.extend(
                 [
                     (1 - alpha, alpha),
@@ -341,7 +341,7 @@ def _mlt_lump_scheme(ref_el, degree):
                     (1 - alpha, 0.0),
                 ]  # edge points (1st set of class 3 points)
             )
-            alpha = 0.268649695592714349480742
+            alpha = 0.2686496955927143e-00
             x.extend(
                 [
                     (1 - alpha, alpha),
@@ -353,7 +353,7 @@ def _mlt_lump_scheme(ref_el, degree):
                 ]  # edge points (2nd set of class 3 points)
             )
 
-            beta = 0.468059729056814751780658
+            beta = 0.4680597290568147e-00
             x.extend(
                 [
                     (beta, beta),
@@ -361,7 +361,7 @@ def _mlt_lump_scheme(ref_el, degree):
                     (beta, 1 - 2 * beta)
                 ] # interior points on bisector (1st set of class 5 points)
             )
-            beta = 0.0793088545089875461560173
+            beta = 0.7930885450898754e-1
             x.extend(
                 [
                     (beta, beta),
@@ -369,7 +369,7 @@ def _mlt_lump_scheme(ref_el, degree):
                     (beta, 1 - 2 * beta)
                 ] # interior points on bisector (2nd set of class 5 points)
             )
-            beta = 0.392931636618867333850738
+            beta = 0.3929316366188673e-00
             x.extend(
                 [
                     (beta, beta),
@@ -378,8 +378,8 @@ def _mlt_lump_scheme(ref_el, degree):
                 ] # interior points on bisector (3rd set of class 5 points)
             )
 
-            gamma = 0.248172758709406807134069
-            delta = 0.699812197147049754157975
+            gamma = 0.2481727587094068e-00
+            delta = 0.6998121971470497e-00
             x.extend(
                 [
                     (gamma, delta),
@@ -390,8 +390,8 @@ def _mlt_lump_scheme(ref_el, degree):
                     (delta, 1 - gamma - delta),
                 ]  # interior points (1st set of class 6 points)
             )
-            gamma = 0.156582066033687531622229
-            delta = 0.243089592364562988710841
+            gamma = 0.1565820660336875e-00
+            delta = 0.2430895923645629e-00
             x.extend(
                 [
                     (gamma, delta),
@@ -404,15 +404,15 @@ def _mlt_lump_scheme(ref_el, degree):
             )
             
             w = arange(39, dtype=float64)
-            w[0:3] = 0.000535113520281665722530572 # class 1 points (vertices)
-            w[3:6] = 0.00429435346026293306665947 # class 2 points
-            w[6:12] = 0.00302990950926060544290299 # class 3 points
-            w[12:18] = 0.00316396316646563171286403
-            w[18:21] = 0.0243035184285235576570195 # class 5 points
-            w[21:24] = 0.0166312091329395024891160
-            w[24:27] = 0.0342178857644876540882108
-            w[27:33] = 0.0173480160090330087919888 # class 6 points
-            w[33:39] = 0.0198004044953264308738093
+            w[0:3] = 0.5351135202816657e-3 # class 1 points (vertices)
+            w[3:6] = 0.4294353460262933e-2 # class 2 points
+            w[6:12] = 0.3029909509260605e-2 # class 3 points
+            w[12:18] = 0.3163963166465631e-2
+            w[18:21] = 0.2430351842852355e-1 # class 5 points
+            w[21:24] = 0.1663120913293950e-1
+            w[24:27] = 0.3421788576448765e-1
+            w[27:33] = 0.1734801600903300e-1 # class 6 points
+            w[33:39] = 0.1980040449532643e-1
     
         else:
             raise ValueError("Dimension not supported")

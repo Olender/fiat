@@ -83,7 +83,7 @@ def _get_entity_ids(ref_el, degree):
             entity_ids = {
                 0: dict((i, [i]) for i in range(3)),
                 1: dict((i, etop[i]) for i in range(3)),
-                2: {0: [i for i in range(15, 39)]},
+                2: {0: [i for i in range(18, 39)]},
             }
     return entity_ids
 
